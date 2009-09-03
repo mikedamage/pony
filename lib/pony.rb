@@ -5,6 +5,10 @@ begin
 rescue LoadError
 	require 'actionmailer'
 end
+begin
+	require 'smtp_tls'
+rescue LoadError
+end
 
 module Pony
 	def self.mail(options)
@@ -62,6 +66,7 @@ module Pony
 		o = default_options[:smtp].merge(options[:smtp])
 		smtp = Net::SMTP.new(o[:host], o[:port])
 		if o.include?(:auth)
+			smtp.enable_starttls
 			smtp.start(o[:domain], o[:user], o[:password], o[:auth])
 		else
 			smtp.start(o[:domain])

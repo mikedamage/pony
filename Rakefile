@@ -49,6 +49,7 @@ spec = Gem::Specification.new do |s|
 
 	s.require_path = "lib"
 	s.add_dependency( 'tmail', '~> 1.0' )
+	s.add_dependency( 'smtp_tls', '>= 1.0.3')
 end
 
 Rake::GemPackageTask.new(spec) do |p|
